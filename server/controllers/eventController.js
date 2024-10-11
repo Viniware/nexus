@@ -44,6 +44,16 @@ exports.getAllEvents = async (req, res) => {
     }
 };
 
+exports.getEventsByCourt = async (req, res) => {
+    try {
+        const { courtId } = req.params;
+        const events = await Event.find({ court: courtId }).populate('creator', 'username');
+        res.status(200).json(events);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 exports.updateEvent = async (req, res) => {
     try {
         const { name, time, location, description, courtId, userId } = req.body;

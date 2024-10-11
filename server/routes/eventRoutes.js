@@ -4,6 +4,7 @@ const eventController = require('../controllers/eventController.js');
 
 router.get('/', eventController.getAllEvents);
 router.get('/:id', eventController.getEventById);
+router.get('/court/:courtId', eventController.getEventsByCourt);
 router.post('/register', eventController.createEvent);
 router.put('/:id/update', eventController.updateEvent);
 router.delete('/:id/delete', eventController.deleteEvent);

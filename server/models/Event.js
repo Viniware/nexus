@@ -14,6 +14,11 @@ const eventSchema = new mongoose.Schema({
         ref: 'Court',
         required: true,
     },
+    creator: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
     partipants: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'EventParticipant'
