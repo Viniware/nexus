@@ -13,7 +13,7 @@ exports.createEvent = async (req, res) => {
             return res.status(404).json({ message: 'Court or User not found' });
         }
 
-        const event = new Event({ name, time, location, description, court: courtId, creator: userId });
+        const event = new Event({ name, time, location, court: courtId, creator: userId });
         await event.save();
 
         res.status(201).json({ message: 'Event created successfully', event });
