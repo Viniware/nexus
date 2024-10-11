@@ -1,9 +1,24 @@
 const mongoose = require('mongoose');
 
-const EventParticipantSchema = new mongoose.Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    event: { type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: true },
-    joinedAt: { type: Date, default: Date.now },
+const eventParticipantSchema = new mongoose.Schema({
+    user: { 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    event: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Event', 
+        required: true
+    },
+    status: {
+        type: String,
+        enum: ['Pending', 'Confirmed', 'Cancelled'],
+        default: 'Pending',
+    },
+}, {
+    timestamps: true,
 });
 
-module.exports = mongoose.model('EventParticipant', EventParticipantSchema);
+const EventParticipant = mongoose.model('EventParticipant', eventParticipantSchema);
+module.exports = EventParticipant;
