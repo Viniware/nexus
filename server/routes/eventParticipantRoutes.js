@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const eventParticipantController = require('../controllers/eventParticipantController');
-const { getEventById } = require('../controllers/eventController');
 
-router.post('/register', eventParticipantController.joinEvent);
-router.post('/remove', eventParticipantController.leaveEvent);
+router.post('/register', eventParticipantController.registerParticipant);
+router.post('/remove', eventParticipantController.removeParticipant);
 router.get('/:eventId/participants', eventParticipantController.getParticipantsByEvent);
-router.get('/user/:userId/events', eventParticipantController.getEventByUser);
+router.get('/user/:userId/events', eventParticipantController.getEventsByUser);
 
 module.exports = router;

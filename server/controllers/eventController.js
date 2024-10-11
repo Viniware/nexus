@@ -4,7 +4,7 @@ const User = require('../models/User');
 
 exports.createEvent = async (req, res) => {
     try {
-        const { name, date, location, description, courtId, userId } = req.body;
+        const { name, time, location, courtId, userId } = req.body;
 
         const court = await Court.findById(courtId);
         const user = await User.findById(userId);
@@ -13,7 +13,7 @@ exports.createEvent = async (req, res) => {
             return res.status(404).json({ message: 'Court or User not found' });
         }
 
-        const event = new Event({ name, date, location, description, court: courtId, creator: userId });
+        const event = new Event({ name, time, location, description, court: courtId, creator: userId });
         await event.save();
 
         res.status(201).json({ message: 'Event created successfully', event });
@@ -46,7 +46,7 @@ exports.getAllEvents = async (req, res) => {
 
 exports.updateEvent = async (req, res) => {
     try {
-        const { name, date, location, description, courtId, userId } = req.body;
+        const { name, time, location, description, courtId, userId } = req.body;
 
         const event = await Event.findById(req.params.id);
         if (!event) {
@@ -54,7 +54,7 @@ exports.updateEvent = async (req, res) => {
         }
 
         event.name = name || event.name;
-        event.date = date || event.date;
+        event.time = time || event.time;
         event.location = location || event.location;
         event.description = description || event.description;
         event.court = courtId || event.court;
@@ -62,7 +62,7 @@ exports.updateEvent = async (req, res) => {
 
         await event.save();
 
-        res.status(200).json({ message: 'Event updated successfully', event });
+        res.status(200).json({ message: 'Event uptimed successfully', event });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

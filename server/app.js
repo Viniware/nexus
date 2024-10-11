@@ -2,9 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
+const jwt = require('jsonwebtoken');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3060;
 
 app.use(cors());
 app.use(express.json());
@@ -18,12 +19,15 @@ mongoose.connect(process.env.MONGO_URI, {
 
 const eventRoutes = require('./routes/eventRoutes');
 const courtRoutes = require('./routes/courtRoutes');
+const userRoutes = require('./routes/userRoutes');
+const eventParticipantRoutes = require('./routes/eventParticipantRoutes');
 
 app.use('/api/events', eventRoutes);
 app.use('/api/courts', courtRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/eventParticipants', eventParticipantRoutes);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on https://localhost:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
-
 
