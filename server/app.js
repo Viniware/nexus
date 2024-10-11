@@ -17,8 +17,10 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch(err => console.error('MongoDB connection error:', err));
 
 const eventRoutes = require('./routes/eventRoutes');
+const courtRoutes = require('./routes/courtRoutes');
 
 app.use('/api/events', eventRoutes);
+app.use('/api/courts', courtRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on https://localhost:${PORT}`);

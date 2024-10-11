@@ -1,17 +1,31 @@
 const Court = require('../models/Court');
-const Event = require('../models/Event');
-const User = require('../models/User');
 
 exports.createCourt = async (req, res) => {
     try {
-        const { name, location, description, ownerId } = req.body;
+        const { 
+            name,
+            location,
+            sportType,
+            capacity,
+            availability = true,
+            amenities,
+            rating = 3
+        } = req.body;
 
-        const owner = await User.findById(ownerId);
-        if (!owner) {
-            return res.status(404).json({ message: 'Owner not found' });
+        if (!name || !location || !sportType || capacity === undefined) {
+            return res.status(400).json({ message: 'Missing required fields' });
         }
 
-        const court = new Court({ name, location, description, owner: ownerId });
+        const court = new Court({
+            name,
+            location,
+            sportType,
+            capacity,
+            availability,
+            amenities,
+            rating
+        });
+
         await court.save();
 
         res.status(201).json({ message: 'Court created successfully', court });
@@ -22,7 +36,7 @@ exports.createCourt = async (req, res) => {
 
 exports.getCourtById = async (req, res) => {
     try {
-        const court = await Court.findById(req.params.id).populate('owner', 'username');
+        const court = await Court.findById(req.params.id);
         if (!court) {
             return res.status(404).json({ message: 'Court not found' });
         }
@@ -35,7 +49,7 @@ exports.getCourtById = async (req, res) => {
 
 exports.getAllCourts = async (req, res) => {
     try {
-        const courts = await Court.find().populate('owner', 'username');
+        const courts = await Court.find();
         res.status(200).json(courts);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -44,7 +58,7 @@ exports.getAllCourts = async (req, res) => {
 
 exports.updateCourt = async (req, res) => {
     try {
-        const { name, location, description, ownerId } = req.body;
+        const { name, location, description } = req.body;
 
         const court = await Court.findById(req.params.id);
         if (!court) {
@@ -54,7 +68,6 @@ exports.updateCourt = async (req, res) => {
         court.name = name || court.name;
         court.location = location || court.location;
         court.description = description || court.description;
-        court.owner = ownerId || court.owner;
 
         await court.save();
 
