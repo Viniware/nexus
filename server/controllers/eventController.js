@@ -1,6 +1,7 @@
 const Event = require('../models/Event');
 const Court = require('../models/Court');
 const User = require('../models/User');
+const EventParticipant = require('../models/EventParticipant');
 
 exports.createEvent = async (req, res) => {
     try {
@@ -9,18 +10,22 @@ exports.createEvent = async (req, res) => {
         const court = await Court.findById(courtId);
         const user = await User.findById(userId);
 
-        if(!court || !user) {
+        if (!court || !user) {
             return res.status(404).json({ message: 'Court or User not found' });
         }
 
         const event = new Event({ name, time, location, court: courtId, creator: userId });
         await event.save();
 
+        const eventParticipant = new EventParticipant({ user: userId, event: event._id });
+        await eventParticipant.save();
+
         res.status(201).json({ message: 'Event created successfully', event });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 exports.getEventById = async (req, res) => {
     try {
