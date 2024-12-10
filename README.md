@@ -1,6 +1,6 @@
-# Nexus 🏀⚽🎾
-
 ![Banner Image](https://i.postimg.cc/7Z0FLxkB/DEVELOPER-1.png)
+
+# Nexus 🏀⚽🎾
 
 **Nexus** is a platform that connects sports enthusiasts, making it easier to find and join games in your area. Whether it's football, basketball, tennis, or any other sport, Nexus helps you locate nearby sports courts and join or create games with just a few clicks.
 
