@@ -1,4 +1,4 @@
-![Banner Image]([https://i.postimg.cc/7Z0FLxkB/DEVELOPER-1.png](https://i.postimg.cc/0ynLSVzm/Design-sem-nome-1.png))
+![Banner Image]([https://i.postimg.cc/0ynLSVzm/Design-sem-nome-1.png])
 
 # Nexus 🏀⚽🎾
 
