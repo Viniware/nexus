@@ -14,8 +14,8 @@
 
 ## Technology Stack
 
-- **Backend**: (TBD, currently exploring options such as Node.js or other frameworks)
-- **Database**: (TBD, flexible between MongoDB or SQL)
+- **Backend**: Node.js
+- **Database**: MongoDB
 - **Authentication**: JWT (potential for other methods)
 - **Real-time Updates**: Considering Socket.IO for real-time notifications
 
